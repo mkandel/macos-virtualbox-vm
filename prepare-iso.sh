@@ -63,7 +63,7 @@ function createISO()
     echo Restore the Base System into the ${isoName} ISO image
     echo --------------------------------------------------------------------------
     echo $ asr restore -source /Volumes/install_app/BaseSystem.dmg -target /Volumes/install_build -noprompt -noverify -erase
-    asr restore -source /Volumes/install_app/BaseSystem.dmg -target /Volumes/install_build -noprompt -noverify -erase
+    asr restore -source /Applications/Install\ macOS\ High\ Sierra.app/Contents/SharedSupport/BaseSystem.dmg -target /Volumes/install_build -noprompt -noverify -erase
 
     echo
     echo Remove Package link and replace with actual files
@@ -77,9 +77,9 @@ function createISO()
     echo Copy macOS ${isoName} installer dependencies
     echo --------------------------------------------------------------------------
     echo $ cp -rp /Volumes/install_app/BaseSystem.chunklist /Volumes/OS\ X\ Base\ System/BaseSystem.chunklist
-    cp -rp /Volumes/install_app/BaseSystem.chunklist /Volumes/OS\ X\ Base\ System/BaseSystem.chunklist
+    cp -rp /Applications/Install\ macOS\ High\ Sierra.app/Contents/SharedSupport/BaseSystem.chunklist /Volumes/OS\ X\ Base\ System/BaseSystem.chunklist
     echo $ cp -rp /Volumes/install_app/BaseSystem.dmg /Volumes/OS\ X\ Base\ System/BaseSystem.dmg
-    cp -rp /Volumes/install_app/BaseSystem.dmg /Volumes/OS\ X\ Base\ System/BaseSystem.dmg
+    cp -rp /Applications/Install\ macOS\ High\ Sierra.app/Contents/SharedSupport/BaseSystem.dmg /Volumes/OS\ X\ Base\ System/BaseSystem.dmg
 
     echo
     echo Unmount the installer image
@@ -145,10 +145,10 @@ hdiutil info | grep /dev/disk | grep partition | cut -f 1 | xargs hdiutil detach
 # See if we can find either the ElCapitan or the Sierra installer.
 # If successful, then create the iso file from the installer.
 
-installerExists "Install macOS Sierra.app"
+installerExists "Install macOS High Sierra.app"
 result=$?
 if [ ${result} -eq 0 ] ; then
-  createISO "Install macOS Sierra.app" "Sierra"
+  createISO "Install macOS High Sierra.app" "HighSierra"
 else
   installerExists "Install OS X El Capitan.app"
   result=$?
